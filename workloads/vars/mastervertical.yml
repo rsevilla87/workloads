@@ -46,3 +46,6 @@ mastervertical_projects: "{{ lookup('env', 'MASTERVERTICAL_PROJECTS')|default(10
 
 # Pass/fail criteria
 expected_mastervertical_duration: "{{ lookup('env', 'EXPECTED_MASTERVERTICAL_DURATION')|default(600, true)|int }}"
+
+# Collect kube-apiserver and kube controller manager profiling data
+profile_cluster_ops: "{{ lookup('env', 'PROFILE_CLUSTER_OPS')|default(true, true)|bool }}'

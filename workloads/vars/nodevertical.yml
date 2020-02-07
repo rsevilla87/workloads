@@ -51,3 +51,6 @@ nodevertical_ts_timeout: "{{ lookup('env', 'NODEVERTICAL_TS_TIMEOUT')|default(18
 
 # Pass/fail criteria
 expected_nodevertical_duration: "{{ lookup('env', 'EXPECTED_NODEVERTICAL_DURATION')|default(600, true)|int }}"
+
+# Collect kube-apiserver and kube controller manager profiling data
+profile_cluster_ops: "{{ lookup('env', 'PROFILE_CLUSTER_OPS')|default(true, true)|bool }}'

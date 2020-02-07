@@ -90,11 +90,14 @@ data:
     exit_code=$?
     end_time=$(date +%s)
     duration=$((end_time-start_time))
-
     workload_log "Writing Cluster Loader Exit Code"
     jq -n '. | ."exit_code"='${exit_code}' | ."duration"='${duration}'' > "${result_dir}/exit.json"
     workload_log "Writing Cluster Loader Metrics to clusterloader.json"
     grep "cluster_loader_marker" ${result_dir}/clusterloader.txt > "${result_dir}/clusterloader.json"
+    if [[ ${profile_cluster_ops} == "true" ]]; then
+      workload_log "Collecting profiling information from kube-controller-manager and kube-apiserver"
+      oc adm inspect co/kube-apiserver co/kube-controller-manager --dest-dir ${result_dir}/profiling_info
+    fi
 
     workload_log "Finished workload script"
   mastervertical.yaml.template: |
